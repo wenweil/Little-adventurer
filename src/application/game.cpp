@@ -1,5 +1,6 @@
 #include "application/game.h"
 #include "event/windowEvent.h"
+#include "event/keyEvent.h"
 
 namespace melodramatic{
 
@@ -72,16 +73,23 @@ namespace melodramatic{
             switch (action)
             {
                 case GLFW_PRESS:
-                    
+                {
+                    keyPressedEvent event(key);
+                    data.function(event);
                     break;
-                case GLFW_RELEASE:
+                }
+                case GLFW_RELEASE:{
+                    keyReleasedEvent event(key);
+                    data.function(event);
+                }
                     break;
-                case GLFW_REPEAT:
+                case GLFW_REPEAT:{
+                    keyRepeatedEvent event(key);
+                    data.function(event);
                     break;
+                }
             }
         });
-    
-
         m_running = true;
     }
 

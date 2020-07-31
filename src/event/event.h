@@ -3,7 +3,7 @@ namespace melodramatic {
 
     enum class eventType{
         windowClose, windowResize,
-        keyPressed, keyReleased, kKeyRepeated,
+        keyPressed, keyReleased, KeyRepeated,
         mouseMove, mouseButtonPressed, mouseButtonReleased,
         gameTick,
     };
