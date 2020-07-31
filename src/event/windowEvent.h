@@ -1,7 +1,7 @@
 #include "event/event.h"
 
 namespace melodramatic{
-    class windowResizeEvent : public Event{
+    class windowResizeEvent : public event{
         public:
             windowResizeEvent(int width, int height);
             eventType getEventType() override{ return type;};
@@ -11,7 +11,7 @@ namespace melodramatic{
             int thisHeight;
             eventType type = eventType::windowResize;
     };
-    class windowCloseEvent : public Event{
+    class windowCloseEvent : public event{
         public:
             eventType getEventType() override {return type;};
             void handle() override;

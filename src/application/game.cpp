@@ -1,6 +1,9 @@
 #include "application/game.h"
 #include "event/windowEvent.h"
 #include "event/keyEvent.h"
+#include "event/mouseEvent.h"
+
+#define DEBUG
 
 namespace melodramatic{
 
@@ -18,7 +21,7 @@ namespace melodramatic{
         assert(!s_instance);
     }
 
-    void game::onEvent(Event& e){
+    void game::onEvent(event& e){
         e.handle();
     }
 
@@ -90,6 +93,31 @@ namespace melodramatic{
                 }
             }
         });
+
+        glfwSetCursorPosCallback(m_window,[](GLFWwindow* window, double xpos, double ypos){
+            windowData& data = *(windowData*)glfwGetWindowUserPointer(window);
+            mouseMoveEvent event(xpos,ypos);
+            data.function(event);
+        });
+
+        glfwSetMouseButtonCallback(m_window,[](GLFWwindow* window, int button, int action, int mods){
+            windowData& data = *(windowData*)glfwGetWindowUserPointer(window);
+            switch (action)
+            {
+                case GLFW_PRESS:
+                {
+                    mouseButtonPressedEvent event(button);
+                    data.function(event);
+                    break;
+                }
+                case GLFW_RELEASE:{
+                    mouseButtonReleasedEvent event(button);
+                    data.function(event);
+                }
+                    break;
+            }
+        });
+
         m_running = true;
     }
 

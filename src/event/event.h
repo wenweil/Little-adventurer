@@ -8,9 +8,9 @@ namespace melodramatic {
         gameTick,
     };
 
-    class Event{
+    class event{
         public:
-            virtual ~Event() = default;
+            virtual ~event() = default;
             virtual eventType getEventType() = 0;
             virtual void handle() = 0;
     };

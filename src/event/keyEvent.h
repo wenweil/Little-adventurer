@@ -1,7 +1,7 @@
 #include "event/event.h"
 
 namespace melodramatic{
-    class keyPressedEvent : public Event{
+    class keyPressedEvent : public event{
         public:
             keyPressedEvent(int inKey);
             eventType getEventType() override;
@@ -11,7 +11,7 @@ namespace melodramatic{
             int key;
 
     };
-    class keyReleasedEvent : public Event{
+    class keyReleasedEvent : public event{
         public:
             keyReleasedEvent(int inKey);
             eventType getEventType() override;
@@ -20,7 +20,7 @@ namespace melodramatic{
             eventType type = eventType::keyReleased;
             int key;
     };
-    class keyRepeatedEvent :public Event{
+    class keyRepeatedEvent :public event{
         public:
             keyRepeatedEvent(int inKey);
             eventType getEventType() override;
