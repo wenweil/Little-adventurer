@@ -1,5 +1,8 @@
 #!/bin/sh
 
+rm bin-int/*
+rm bin/*
+
 CC="g++"
 BINDIR="bin"
 INTDIR="bin-int"
