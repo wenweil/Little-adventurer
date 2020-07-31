@@ -1,0 +1,9 @@
+.vscode
+bin
+bin-int
+*.html
+*.js
+*.png
+*.css
+*svg
+dependencies
