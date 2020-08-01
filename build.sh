@@ -11,7 +11,7 @@ SRCDIR="src"
 CFLAGS="-Idependencies/glfw/include -Isrc"
 LFLAGS="-Ldependencies/glfw/lib-mingw-w64"
 
-LIBS="-lglfw3 -lopengl32 -lgdi32"
+LIBS="-lglfw3 -lopengl32 -lgdi32 -pthread"
 
 FILE=`find $SRCDIR -type f -name "*.cpp"`
 

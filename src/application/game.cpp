@@ -2,6 +2,7 @@
 #include "event/windowEvent.h"
 #include "event/keyEvent.h"
 #include "event/mouseEvent.h"
+#include "application/gameTicker.h"
 
 #define DEBUG
 
@@ -31,6 +32,7 @@ namespace melodramatic{
     }
 
     void game::onClose(){
+        ticker::getInstance()->stopTicking();
         m_running = false;
     }
 
@@ -117,6 +119,8 @@ namespace melodramatic{
                     break;
             }
         });
+        ticker* ticker = ticker::getInstance();
+        ticker->startTicking();
 
         m_running = true;
     }

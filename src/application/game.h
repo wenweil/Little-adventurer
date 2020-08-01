@@ -7,11 +7,8 @@
 
 namespace melodramatic {
     class game {
-
         private:
-
             using EventCallBackFn = std::function<void(event&)>;
-
             static game* s_instance;
             GLFWwindow* m_window;
             bool initalized = false;
@@ -22,7 +19,6 @@ namespace melodramatic {
                 EventCallBackFn function;
             }windowData;
             windowData data;
-    
         public:
             static game* getInstance();
             void init();
@@ -33,6 +29,5 @@ namespace melodramatic {
             void setNewWindowSize(int width, int height);
             void onEvent(event& e);
             void setEventCallback(const EventCallBackFn& callback) {data.function = callback;};
-
     };
 }
