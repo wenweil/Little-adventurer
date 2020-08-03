@@ -1,9 +1,4 @@
 #include "application/game.h"
-#include "event/windowEvent.h"
-#include "event/keyEvent.h"
-#include "event/mouseEvent.h"
-#include "application/gameTicker.h"
-
 #define DEBUG
 
 namespace melodramatic{
@@ -53,6 +48,9 @@ namespace melodramatic{
         }
         
         glfwMakeContextCurrent(m_window);
+
+        assert(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress));
+    
 
         glfwSetWindowUserPointer(m_window,&data);
 
@@ -128,6 +126,9 @@ namespace melodramatic{
     void game::run(){
         while(m_running){
             glfwSwapBuffers(m_window);
+
+            glClearColor(0.2f,0.2f,0.2f,1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
 
             glfwPollEvents();
         }

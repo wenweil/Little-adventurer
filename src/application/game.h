@@ -1,8 +1,14 @@
 #pragma once
+#define GLFW_INCLUDE_NONE
 #include <assert.h>
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 #include <functional>
 #include "event/event.h"
+#include "event/windowEvent.h"
+#include "event/keyEvent.h"
+#include "event/mouseEvent.h"
+#include "application/gameTicker.h"
+#include <GLFW/glfw3.h>
 
 
 namespace melodramatic {

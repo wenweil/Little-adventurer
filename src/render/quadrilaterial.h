@@ -1,4 +1,5 @@
 #include <vector>
+#include "render/vertex.h"
 
 namespace melodramatic {
     class quadrilaterial {
@@ -14,7 +15,7 @@ namespace melodramatic {
             diamond(float inXPosOffset, float inYPosOffset,float inXNegOffset, float inYNegOffset) 
               : xPosOffset(inXPosOffset), yPosOffset(inYPosOffset),xNegOffset(inXNegOffset), yNegOffset(inYNegOffset){};
             void move(float inXPos, float inYPos);
-            std::vector<float> generateVertices();
+            std::vector<vertex> generateVertices();
         private:
             float xPos,yPos,xPosOffset,xNegOffset,yPosOffset,yNegOffset;
     };
@@ -25,7 +26,7 @@ namespace melodramatic {
             rectangle(float inWidth, float inHeight) : xPos(0), yPos(0) , width(inWidth), height(inHeight){};
             rectangle(float inXPos, float inYPos) : xPos(inXPos), yPos(inYPos) , width(0), height(0){};
             void move(float inXPos, float inYPos);
-            std::vector<float> generateVertices();
+            std::vector<vertex> generateVertices();
         private:
             float xPos, yPos, width, height;
     };
