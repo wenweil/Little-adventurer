@@ -19,8 +19,8 @@ for i in $FILE
 do
     OUTFILE=`basename ${i%.*}`
     OUTFILE="$INTDIR/$OUTFILE.o"
-    echo $CC $CFLAGS -c $i -o $OUTFILE
-    $CC $CFLAGS -c $i -o $OUTFILE
+    echo $CC $CFLAGS -g -c $i -o $OUTFILE
+    $CC $CFLAGS -g -c $i -o $OUTFILE
 done
 echo $CC $LFLAGS -g $INTDIR/* -o $BINDIR/game.exe $LIBS
 $CC $LFLAGS -g $INTDIR/* -o $BINDIR/game.exe $LIBS
