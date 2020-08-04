@@ -10,6 +10,8 @@ int main (){
 
     game->run();
 
+    glfwDestroyWindow(game->getWindow());
+
     glfwTerminate();
 
     return 0;

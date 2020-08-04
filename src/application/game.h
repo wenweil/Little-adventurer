@@ -30,6 +30,7 @@ namespace melodramatic {
             void init();
             void run();
             game();
+            GLFWwindow* getWindow(){return m_window;};
             void onClose();
             void onResize(int width, int height);
             void setNewWindowSize(int width, int height);

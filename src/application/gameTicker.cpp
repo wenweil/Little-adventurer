@@ -30,9 +30,8 @@ namespace melodramatic{
 
     void ticker::tick(){
         while(ticking){
-            gametTickEvent *event = new gametTickEvent();
-            game::getInstance()->onEvent(*event);
-            delete event;
+            gametTickEvent event;
+            game::getInstance()->onEvent(event);
             Sleep(tickSpeed);
         }
     }

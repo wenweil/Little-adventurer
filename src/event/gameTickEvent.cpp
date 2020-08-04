@@ -1,5 +1,5 @@
 
-#include "event/gametTickEvent.h"
+#include "event/gameTickEvent.h"
 
 namespace melodramatic{
     eventType gametTickEvent::getEventType(){
@@ -7,6 +7,5 @@ namespace melodramatic{
     };
 
     void gametTickEvent::handle(){
-        std::cout<<"game ticked"<<std::endl;
     }
 }

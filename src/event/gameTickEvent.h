@@ -6,7 +6,6 @@ namespace melodramatic{
     private:
         eventType type = eventType::gameTick;
     public:
-        gametTickEvent() = default;
         eventType getEventType() override;
         void handle() override;
     };  
