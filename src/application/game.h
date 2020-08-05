@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <glad/glad.h>
 #include <functional>
+#include <vector>
 #include "event/event.h"
 #include "event/windowEvent.h"
 #include "event/keyEvent.h"
