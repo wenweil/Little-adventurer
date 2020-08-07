@@ -8,9 +8,10 @@ namespace melodramatic{
                 NONE = 0, OPENGL = 1, D3D = 2, VULKAN = 3
             };
             virtual void draw() = 0;
-            virtual void setVertexBuffer(unsigned int count,std::vector<float> data) = 0;
-            virtual void setIndexBuffer(unsigned int count, std::vector<unsigned int> data) =0 ;
-            virtual void setShader() = 0;
+            virtual void setVertexBuffer(std::vector<float> data) = 0;
+            virtual void setIndexBuffer(std::vector<unsigned int> data) =0 ;
+            virtual void setShader(const char* fragmentShader, const char* vertexShader) = 0;
+            virtual void bindTexture(unsigned int &tid, void* data,unsigned int width, unsigned int height) = 0;
 
     };
 
@@ -18,16 +19,19 @@ namespace melodramatic{
         public:
             static OPENGL_API* getInstance();
             OPENGL_API(){assert(!instance);};
-            void setVertexBuffer(unsigned int count, std::vector<float>data) override;
+            void setVertexBuffer(std::vector<float>data) override;
             void draw() override;
-            void setIndexBuffer(unsigned int count, std::vector<unsigned int> data) override ;
-            void setShader() override;
+            void setIndexBuffer(std::vector<unsigned int> data) override ;
+            void setShader(const char* fragmentShader, const char* vertexShader) override;
+            void bindTexture(unsigned int &tid, void* data,unsigned int width, unsigned int height) override;
         private:
             void init();
             static OPENGL_API* instance;
             GLFWwindow* m_window;
             unsigned int drawCount;
             unsigned int vertexBuffer, vertexArray, indexBuffer;
+            unsigned int textureCount;
+            unsigned int vertexShader, fragmentShader, shaderProgram;
     };
     
 }

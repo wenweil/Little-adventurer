@@ -120,6 +120,10 @@ namespace melodramatic{
         ticker* ticker = ticker::getInstance();
         ticker->startTicking();
 
+        std::cout<<"vendor :"<<glGetString(GL_VENDOR)<<std::endl;
+        std::cout<<"renderer :"<<glGetString(GL_RENDERER)<<std::endl;
+        std::cout<<"version :"<<glGetString(GL_VERSION)<<std::endl;
+
         m_running = true;
     }
 

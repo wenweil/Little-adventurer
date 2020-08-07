@@ -6,5 +6,8 @@ namespace melodramatic {
             ~vertex() = default;
         private:
             float x,y,z;
+            float r,g,b,a;
+            float textureX, textureY;
+            float textureID;
     };
 }

@@ -1,7 +1,7 @@
 #include "application/gameTicker.h"
 #include "application/game.h"
 #include <windows.h>
-#include "event/gametTickEvent.h"
+#include "event/gameTickEvent.h"
 
 namespace melodramatic{
     ticker* ticker::instance = nullptr;
