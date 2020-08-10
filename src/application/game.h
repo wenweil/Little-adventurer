@@ -10,6 +10,7 @@
 #include "event/mouseEvent.h"
 #include "application/gameTicker.h"
 #include <GLFW/glfw3.h>
+#include "render/renderAPI.h"
 
 
 namespace melodramatic {

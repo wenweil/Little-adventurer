@@ -1,0 +1,5 @@
+
+namespace melodramatic{
+    class layer{};
+
+}

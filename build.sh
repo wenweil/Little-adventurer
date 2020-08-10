@@ -8,7 +8,7 @@ BINDIR="bin"
 INTDIR="bin-int"
 SRCDIR="src"
 
-CFLAGS="-Idependencies/glfw/include -Idependencies/glad/include -Isrc"
+CFLAGS="-Idependencies/glfw/include -Idependencies/glad/include -Idependencies/ -Isrc"
 LFLAGS="-Ldependencies/glfw/lib-mingw-w64"
 
 GLAD="dependencies/glad/src/glad.c"
