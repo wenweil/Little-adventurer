@@ -2,16 +2,12 @@ namespace melodramatic{
     class matrix{
         public:
             matrix(){
-                data = new float*[4];
-                data[0] = new float[4];
-                for(int i = 0;i < 4; i++){
-                    for(int j = 0;j < 4; j++)
-                        data[i][j] = i == j ? 1.0f : 0.0f;
-                }
+                data = new float[16];
+                for(int row = 0; row < 4;row++)
+                    for (int col = 0; col < 4; col++)
+                        data[row * 4 + col] = (row == col) ? 1.0f : 0.0f;
             };
             ~matrix(){
-                for(int i = 0; i < 4; i++)
-                    delete[] data[i];
                 delete[] data;
             };
             matrix operator*( matrix const &B){
@@ -19,25 +15,29 @@ namespace melodramatic{
                 for(int row = 0; row < 4;row++)
                     for (int col = 0; col < 4; col++)
                         for(int n = 0; n < 4; n++)
-                            result.data[row][col] += this->data[row][n] * B.data[n][col]; 
+                            result.data[row*4 + col] += this->data[row*4 + n] * B.data[n*4 + col]; 
                 return result;
             };
             matrix& operator=(matrix const &B){
                 for(int i = 0;i< 4;i++){
                     for(int j =0; j< 4;j++)
-                        this->data[i][j] = B.data[i][j];
+                        this->data[i*4 + j] = B.data[i*4 + j];
                 }
                 return *this;
             }
+            float* operator[](int i){
+                return &data[i*4];
+            }
+
+            float* getData(){return data;};
+
         private:
             matrix(int i){
-                data = new float*[4];
-                data[0] = new float[4];
-                for(int i = 0;i < 4; i++){
-                    for(int j = 0;j < 4; j++)
-                        data[i][j] =  0.0f;
+                data = new float[16];
+                for(int i = 0;i < 16; i++){
+                        data[i] =  0.0f;
                 }
             }
-            float** data;
+            float* data;
     };
 }
