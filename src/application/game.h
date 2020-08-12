@@ -10,24 +10,18 @@
 #include "event/mouseEvent.h"
 #include "application/gameTicker.h"
 #include <GLFW/glfw3.h>
-#include "render/renderAPI.h"
 
 
 namespace melodramatic {
     class game {
         private:
             using EventCallBackFn = std::function<void(event&)>;
-            static game* s_instance;
-            GLFWwindow* m_window;
-            bool initalized = false;
-            bool m_running = false;
+        public:
             typedef struct{
                 int height;
                 int width;
                 EventCallBackFn function;
             }windowData;
-            windowData data;
-        public:
             static game* getInstance();
             void init();
             void run();
@@ -38,5 +32,14 @@ namespace melodramatic {
             void setNewWindowSize(int width, int height);
             void onEvent(event& e);
             void setEventCallback(const EventCallBackFn& callback) {data.function = callback;};
+            windowData getData() {return data;};
+
+        private:
+            static game* s_instance;
+            GLFWwindow* m_window;
+            bool initalized = false;
+            bool m_running = false;
+            windowData data;
+        
     };
 }

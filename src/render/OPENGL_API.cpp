@@ -81,7 +81,7 @@ namespace melodramatic{
         int err = glGetError();
         
         textureCount = 0;
-        //drawCount = 0;
+        drawCount = 0;
     }
 
     void OPENGL_API::setShader(const std::string& fragmentShaderSource, const std::string& vertexShaderSource){
@@ -109,6 +109,12 @@ namespace melodramatic{
     void OPENGL_API::setTransformMatrix(const glm::mat4& mat){
         auto location = glGetUniformLocation(shaderProgram,"u_Matrix");
         glUniformMatrix4fv(location,1,GL_FALSE,&mat[0][0]);
+    }
+
+    void OPENGL_API::setTransformMatrix(const melodramatic::matrix& mat){
+        auto location = glGetUniformLocation(shaderProgram,"u_Matrix");
+        float* data = mat.getData();
+        glUniformMatrix4fv(location,1,GL_TRUE,data);
     }
 
     void OPENGL_API::bindTexture(unsigned int &tid, void* data,unsigned int width, unsigned int height){

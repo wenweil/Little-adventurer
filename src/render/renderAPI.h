@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string>
 #include <glm/glm/glm.hpp>
+#include "render/matrix.h"
 
 namespace melodramatic{
 
@@ -18,6 +19,7 @@ namespace melodramatic{
             virtual void bindTexture(unsigned int &tid, void* data,unsigned int width, unsigned int height) = 0;
             virtual void onClose() = 0;
             virtual void setTransformMatrix(const glm::mat4& mat) = 0;
+            virtual void setTransformMatrix(const matrix& mat) = 0;
     };
 
     class OPENGL_API : public rendererAPI{
@@ -31,6 +33,7 @@ namespace melodramatic{
             void bindTexture(unsigned int &tid, void* data,unsigned int width, unsigned int height) override;
             void onClose() override;
             void setTransformMatrix(const glm::mat4& mat) override;
+            void setTransformMatrix(const matrix& mat) override;
         private:
             void init();
             static OPENGL_API* instance;

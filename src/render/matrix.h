@@ -28,8 +28,9 @@ namespace melodramatic{
             float* operator[](int i){
                 return &data[i*4];
             }
-
-            float* getData(){return data;};
+            float* getData() const{
+                return data;
+            };
 
         private:
             matrix(int i){

@@ -2,8 +2,9 @@
 namespace melodramatic{
     class scene{
         public:
-            scene();
-            ~scene();
+            scene() = default;
+            ~scene() = default;
         private:
+            int tmp;
     };
 }
