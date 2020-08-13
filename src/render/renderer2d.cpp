@@ -2,6 +2,8 @@
 #include "scene/quadrilateral.h"
 #include  <glm/glm/glm.hpp>
 #include "application/game.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb/stb_image.h>
 
 
 namespace melodramatic {
@@ -155,11 +157,23 @@ namespace melodramatic {
             320.0f+width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 0.0f,  0.0f,
             320.0f+width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 1.0f,  0.0f,
 
-            dat.xPos-width, dat.yPos+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 1.0f,  0.0f,
-            dat.xPos-width, dat.yPos-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 0.0f,  0.0f,
-            dat.xPos+width, dat.yPos-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 0.0f,  0.0f,
-            dat.xPos+width, dat.yPos+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 1.0f,  0.0f,
+            dat.xPos-width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 1.0f,  1.0f,
+            dat.xPos-width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 0.0f,  1.0f,
+            dat.xPos+width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 0.0f,  1.0f,
+            dat.xPos+width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 1.0f,  1.0f,
         };
+
+        std::string path = "assets/nerd.png";
+
+        stbi_set_flip_vertically_on_load(true);
+
+        stbi_uc* textureData = nullptr;
+
+        int imgWidth, imgHeight, channels;
+
+        textureData = stbi_load(path.c_str(),&imgWidth,&imgHeight,&channels,0);
+
+        assert(textureData);
 
         unsigned int indices [] = {
             0,1,2,  2,3,0,
@@ -180,6 +194,12 @@ namespace melodramatic {
         API->setIndexBuffer(iData);
 
         API->setTransformMatrix(m);
+
+        unsigned int tid;
+
+        API->bindTexture(tid,textureData,imgWidth,imgHeight);
+
+        stbi_image_free(textureData);
 
         API->draw();
 

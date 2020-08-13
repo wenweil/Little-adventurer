@@ -17,6 +17,11 @@ namespace melodramatic{
                     data[i] = mat.data[i];
             }
 
+            matrix(matrix&& mat){
+                data = mat.data;
+                mat.data = nullptr;
+            }
+
             matrix operator*( matrix &B)const{
                 matrix result(0);
                 for(int row = 0; row < 4;row++)

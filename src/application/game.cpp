@@ -51,7 +51,6 @@ namespace melodramatic{
         
         glfwMakeContextCurrent(m_window);
 
-
         glfwSetWindowUserPointer(m_window,&data);
 
         glfwSetWindowCloseCallback(m_window,[](GLFWwindow* window){
