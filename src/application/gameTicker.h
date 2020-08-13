@@ -14,6 +14,6 @@ namespace melodramatic{
             static ticker* instance;
             std::thread one;
             bool ticking = false;
-            int tickSpeed = 100;
+            int tickSpeed = 5;
     };
 }

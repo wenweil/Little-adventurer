@@ -98,7 +98,8 @@ namespace melodramatic{
 
         glfwSetCursorPosCallback(m_window,[](GLFWwindow* window, double xpos, double ypos){
             windowData& data = *(windowData*)glfwGetWindowUserPointer(window);
-            mouseMoveEvent event(xpos,ypos);
+            
+            mouseMoveEvent event(xpos,(double)data.height-ypos);
             data.function(event);
         });
 

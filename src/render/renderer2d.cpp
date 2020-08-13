@@ -9,6 +9,15 @@ namespace melodramatic {
     int renderer2D::type = rendererAPI::type::OPENGL;
     rendererAPI* renderer2D::API = nullptr;
 
+    renderer2D::tmp renderer2D::dat = {
+        0,
+        0,
+        false,
+        false,
+        false,
+        false,
+    };
+
     void renderer2D::setAPIType(int inType){
         type = inType;
     }
@@ -91,13 +100,21 @@ namespace melodramatic {
 
         API->setShader(fragShader,vertShader);
 
+        game::windowData data = game::getInstance()->getData();
+
+        dat.xPos = (float)data.width/2;
+        dat.yPos = (float)data.height/2;
+        dat.up = false;
+        dat.down = false;
+        dat.left = false;
+        dat.right = false;
     }
 
     void renderer2D::draw(const scene& scene){
         matrix c;
         game::windowData data = game::getInstance()->getData();
-        c[0][3] = (float)-data.width/2;
-        c[1][3] = (float)-data.height/2;
+        c[0][3] = -dat.xPos;
+        c[1][3] = -dat.yPos;
 
         matrix s;
         s[0][0] = (float)2/data.width;
@@ -122,30 +139,30 @@ namespace melodramatic {
         float height = 100.0f;
 
         float vertexData [] = {
-            960.0f-width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            960.0f-width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            960.0f+width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            960.0f+width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
+            960.0f-width, 540.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
+            960.0f-width, 540.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
+            960.0f+width, 540.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
+            960.0f+width, 540.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
 
-            960.0f-width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            960.0f-width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            960.0f+width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            960.0f+width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
+            960.0f-width, 180.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
+            960.0f-width, 180.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
+            960.0f+width, 180.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
+            960.0f+width, 180.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
 
-            320.0f-width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            320.0f-width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            320.0f+width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            320.0f+width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
+            320.0f-width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+            320.0f-width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 0.0f,  0.0f,
+            320.0f+width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 0.0f,  0.0f,
+            320.0f+width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 1.0f,  0.0f,
 
-            320.0f-width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            320.0f-width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            320.0f+width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            320.0f+width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
+            320.0f-width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
+            320.0f-width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 0.0f,  0.0f,
+            320.0f+width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 0.0f,  0.0f,
+            320.0f+width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 1.0f,  0.0f,
 
-            640.0f-width, 360.0f+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 1.0f,  0.0f,
-            640.0f-width, 360.0f-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 0.0f,  0.0f,
-            640.0f+width, 360.0f-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 0.0f,  0.0f,
-            640.0f+width, 360.0f+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 1.0f,  0.0f,
+            dat.xPos-width, dat.yPos+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 1.0f,  0.0f,
+            dat.xPos-width, dat.yPos-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  0.0f, 0.0f,  0.0f,
+            dat.xPos+width, dat.yPos-height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 0.0f,  0.0f,
+            dat.xPos+width, dat.yPos+height, 0.0f,  0.1f, 0.5f, 0.05f, 1.0f,  1.0f, 1.0f,  0.0f,
         };
 
         unsigned int indices [] = {
