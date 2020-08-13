@@ -12,7 +12,7 @@ namespace melodramatic{
     }
 
     void mouseMoveEvent::handle(){
-        std::cout<<"Mouse moved: xpos "<<xPos<<" ypos "<<yPos<<std::endl;
+       // std::cout<<"Mouse moved: xpos "<<xPos<<" ypos "<<yPos<<std::endl;
     }
 
     mouseButtonPressedEvent::mouseButtonPressedEvent(int inButton){

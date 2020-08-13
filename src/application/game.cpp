@@ -51,8 +51,6 @@ namespace melodramatic{
         
         glfwMakeContextCurrent(m_window);
 
-       // assert(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress));
-    
 
         glfwSetWindowUserPointer(m_window,&data);
 

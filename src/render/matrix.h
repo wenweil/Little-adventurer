@@ -10,7 +10,14 @@ namespace melodramatic{
             ~matrix(){
                 delete[] data;
             };
-            matrix operator*( matrix const &B){
+
+            matrix(const matrix& mat){
+                data = new float[16];
+                for(int i =0;i<16;i++)
+                    data[i] = mat.data[i];
+            }
+
+            matrix operator*( matrix &B)const{
                 matrix result(0);
                 for(int row = 0; row < 4;row++)
                     for (int col = 0; col < 4; col++)
@@ -18,6 +25,13 @@ namespace melodramatic{
                             result.data[row*4 + col] += this->data[row*4 + n] * B.data[n*4 + col]; 
                 return result;
             };
+
+            matrix& operator=(matrix&& B){
+                float* tmp = this->data;
+                this->data = B.data;
+                B.data = tmp;
+                return *this;
+            }
             matrix& operator=(matrix const &B){
                 for(int i = 0;i< 4;i++){
                     for(int j =0; j< 4;j++)

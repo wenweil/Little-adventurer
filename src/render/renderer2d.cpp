@@ -120,12 +120,8 @@ namespace melodramatic {
         s[0][0] = (float)2/data.width;
         s[1][1] = (float)2/data.height;
 
-        
-
         matrix m;
-        m = s * c;
-
-        s[3][3] = 2.0f;
+        m = std::move(s * c);
 
         /* test quad locations
         960 540
