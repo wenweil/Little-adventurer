@@ -78,25 +78,7 @@ namespace melodramatic {
 "void main()\n"
 "{\n"
 "	vec4 texColor = v_Color;\n"
-"	switch(int(v_TexIndex))\n"
-"	{\n"
-"		case 0: texColor *= texture(u_Textures[0], v_TexCoord ); break;\n"
-"		case 1: texColor *= texture(u_Textures[1], v_TexCoord ); break;\n"
-"		case 2: texColor *= texture(u_Textures[2], v_TexCoord ); break;\n"
-"		case 3: texColor *= texture(u_Textures[3], v_TexCoord ); break;\n"
-"		case 4: texColor *= texture(u_Textures[4], v_TexCoord ); break;\n"
-"		case 5: texColor *= texture(u_Textures[5], v_TexCoord ); break;\n"
-"		case 6: texColor *= texture(u_Textures[6], v_TexCoord ); break;\n"
-"		case 7: texColor *= texture(u_Textures[7], v_TexCoord ); break;\n"
-"		case 8: texColor *= texture(u_Textures[8], v_TexCoord ); break;\n"
-"		case 9: texColor *= texture(u_Textures[9], v_TexCoord ); break;\n"
-"		case 10: texColor *= texture(u_Textures[10], v_TexCoord ); break;\n"
-"		case 11: texColor *= texture(u_Textures[11], v_TexCoord ); break;\n"
-"		case 12: texColor *= texture(u_Textures[12], v_TexCoord ); break;\n"
-"		case 13: texColor *= texture(u_Textures[13], v_TexCoord ); break;\n"
-"		case 14: texColor *= texture(u_Textures[14], v_TexCoord ); break;\n"
-"		case 15: texColor *= texture(u_Textures[15], v_TexCoord ); break;\n"
-"	}\n"
+"	texColor *= texture(u_Textures[int(v_TexIndex)], v_TexCoord );\n"
 "	color = texColor;\n"
 "}\n";
 
@@ -137,31 +119,81 @@ namespace melodramatic {
         float height = 100.0f;
 
         float vertexData [] = {
-            960.0f-width, 540.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            960.0f-width, 540.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            960.0f+width, 540.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            960.0f+width, 540.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
-
-            960.0f-width, 180.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 1.0f,  0.0f,
-            960.0f-width, 180.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  0.0f, 0.0f,  0.0f,
-            960.0f+width, 180.0f-height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 0.0f,  0.0f,
-            960.0f+width, 180.0f+height, 0.0f,  0.3f, 0.0f, 0.8f, 1.0f,  1.0f, 1.0f,  0.0f,
-
-            320.0f-width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-            320.0f-width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 0.0f,  0.0f,
-            320.0f+width, 540.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 0.0f,  0.0f,
-            320.0f+width, 540.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 1.0f,  0.0f,
-
-            320.0f-width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 1.0f,  0.0f,
-            320.0f-width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  0.0f, 0.0f,  0.0f,
-            320.0f+width, 180.0f-height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 0.0f,  0.0f,
-            320.0f+width, 180.0f+height, 0.0f,  0.3f, 1.0f, 0.0f, 1.0f,  1.0f, 1.0f,  0.0f,
-
             dat.xPos-width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 1.0f,  1.0f,
             dat.xPos-width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 0.0f,  1.0f,
             dat.xPos+width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 0.0f,  1.0f,
             dat.xPos+width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 1.0f,  1.0f,
         };
+
+        std::vector<float> vData;
+
+        std::vector<unsigned int> iData;
+
+        int w = 50;
+        int h = 30;
+
+        vData.reserve(w*h*4);
+        iData.reserve(w*h*6);
+
+        float gradient = 1.0f;
+
+        int offset = 0;
+
+        for(float i = 0;i < w;i += 1.0f){
+            for(float j = 0;j < h;j += 1.0f){
+                vData.push_back(i*30.0f);
+                vData.push_back(j*30.0f+20.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f-gradient*i/w);
+                vData.push_back(0.0f+gradient*i/w);
+                vData.push_back(1.0f-gradient*j/h);
+                vData.push_back(1.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+
+                vData.push_back(i*30.0f);
+                vData.push_back(j*30.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f-gradient*j/h);
+                vData.push_back(0.0f+gradient*i/w);
+                vData.push_back(1.0f-gradient*j/h);
+                vData.push_back(1.0f);
+                vData.push_back(0.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f);
+
+                vData.push_back(i*30.0f+20.0f);
+                vData.push_back(j*30.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f-gradient*j/h);
+                vData.push_back(0.0f+gradient*i/w);
+                vData.push_back(1.0f-gradient*i/h);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f);
+
+                vData.push_back(i*30.0f+20.0f);
+                vData.push_back(j*30.0f+20.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f-gradient*i/w);
+                vData.push_back(0.0f+gradient*j/h);
+                vData.push_back(1.0f-gradient*j/h);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+
+                iData.push_back(0+offset);
+                iData.push_back(1+offset);
+                iData.push_back(2+offset);
+                iData.push_back(2+offset);
+                iData.push_back(3+offset);
+                iData.push_back(0+offset);
+                offset +=4;
+            }
+        }
 
         std::string path = "assets/nerd.png";
 
@@ -175,20 +207,16 @@ namespace melodramatic {
 
         assert(textureData);
 
-        unsigned int indices [] = {
-            0,1,2,  2,3,0,
-            4,5,6,  6,7,4,
-            8,9,10, 10,11,8,
-            12,13,14,  14,15,12,
-            16,17,18,  18,19,16 
-        };
-
-        std::vector<float> vData;
+        iData.push_back(0+offset);
+        iData.push_back(1+offset);
+        iData.push_back(2+offset);
+        iData.push_back(2+offset);
+        iData.push_back(3+offset);
+        iData.push_back(0+offset);
+        offset +=4;
+        
         for(auto c:vertexData)
             vData.push_back(c);
-        std::vector<unsigned int> iData;
-        for(auto c:indices)
-            iData.push_back(c);
 
         API->setVertexBuffer(vData);
         API->setIndexBuffer(iData);
