@@ -7,8 +7,11 @@ namespace melodramatic{
             ~scene() = default;
             void addLayer(layer& l);
             std::vector<layer> getLayer(){return dataStore;};
+            void setCamPos(float x, float y);
+            void getCamPos(float& x ,float& y);
         private:
             std::vector<layer> dataStore;
             int tmp;
+            float camX, camY;
     };
 }
