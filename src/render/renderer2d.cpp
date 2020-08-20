@@ -10,6 +10,9 @@ namespace melodramatic {
 
     int renderer2D::type = rendererAPI::type::OPENGL;
     rendererAPI* renderer2D::API = nullptr;
+    std::vector<float> renderer2D::vData;
+    std::vector<unsigned int> renderer2D::iData;
+    unsigned int count = 0;
 
     renderer2D::tmp renderer2D::dat = {
         0,
@@ -125,10 +128,6 @@ namespace melodramatic {
             dat.xPos+width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 1.0f,  1.0f,
         };
 
-        std::vector<float> vData;
-
-        std::vector<unsigned int> iData;
-
         int w = 50;
         int h = 30;
 
@@ -231,6 +230,58 @@ namespace melodramatic {
 
         API->draw();
 
+        count = 0;
 
+        iData.clear();
+        vData.clear();
+
+
+    }
+    void renderer2D::drawCurrent(){
+            matrix c;
+            game::windowData data = game::getInstance()->getData();
+            c[0][3] = -dat.xPos;
+            c[1][3] = -dat.yPos;
+
+            matrix s;
+            s[0][0] = (float)2/data.width;
+            s[1][1] = (float)2/data.height;
+
+            matrix m;
+            m = std::move(s * c);
+            API->setVertexBuffer(vData);
+            API->setIndexBuffer(iData);
+
+            API->setTransformMatrix(m);
+            
+            API->draw();
+
+            count = 0;
+
+            iData.clear();
+            vData.clear();
+
+    }
+    float renderer2D::loadTexture(std::string& path){
+        if (count == 15)
+            drawCurrent();
+        stbi_set_flip_vertically_on_load(true);
+
+        stbi_uc* textureData = nullptr;
+
+        int imgWidth, imgHeight, channels;
+
+        textureData = stbi_load(path.c_str(),&imgWidth,&imgHeight,&channels,0);
+
+        assert(textureData);
+
+        unsigned int tid;
+
+        API->bindTexture(tid,textureData,imgWidth,imgHeight);
+
+        stbi_image_free(textureData);
+
+        count++;
+        return (float) count;
     }
 }

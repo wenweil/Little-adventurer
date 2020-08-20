@@ -19,8 +19,39 @@ namespace melodramatic{
         quad->move(xPos,yPos);
     }
 
+    void player::moveUp(){
+        yPos += speed;
+        facing = direction::UP;
+    }
+    void player::moveDown(){
+        yPos -= speed;
+        facing = direction::DOWN;
+    }
+    void player::moveLeft(){
+        xPos -= speed;
+        facing = direction::LEFT;
+    }
+    void player::moveRight(){
+        xPos +=speed;
+        facing = direction::RIGHT;
+    }
+
+    void player::onHit(int damage){
+        hp -= damage;
+        if(hp <= 0)
+            player::onDeath();
+    }
+
+    void player::onRevive(){
+        hp = hpMax;
+    }
+
     void player::generateVertices(std::vector<float>& vData, std::vector<unsigned int>& iData){
 
+    }
+    void player::getPos(float& x, float& y){
+        x = xPos;
+        y = yPos;
     }
 
 }

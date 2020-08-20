@@ -20,7 +20,6 @@ namespace melodramatic{
             void createQuadAsRectangle(float width, float height);
             void createQuadAsDiamond(float xNegOffSet,float xPosOffset, float yNegOffset, float yPosOffset);
 
-            void face(direction d);
             void moveUp();
             void moveDown();
             void moveLeft();
@@ -34,7 +33,7 @@ namespace melodramatic{
             void generateVertices(std::vector<float>& vData, std::vector<unsigned int>& iData) override;
         private:
             float xPos, yPos;
-            int hp;
+            int hp, hpMax;
             float speed;
             std::string texturePath;
             direction facing = direction::RIGHT;
@@ -62,7 +61,7 @@ namespace melodramatic{
         private:
             float xPos, yPos;
             float speed;
-            int hp;
+            int hp, hpMax;
             std::string texturePath;
             direction facing = direction::RIGHT;
             quadrilateral* quad;
