@@ -1,6 +1,9 @@
+#pragma once
 #include <vector>
 #include <string>
 #include "scene/quadrilateral.h"
+#include "scene/textureManager.h"
+#include "render/vertex.h"
 
 namespace melodramatic{
     class entity{
@@ -8,6 +11,7 @@ namespace melodramatic{
             enum direction{
                 UP,DOWN,LEFT,RIGHT
             };
+            ~entity() = default;
             virtual void generateVertices(std::vector<float>& vData, std::vector<unsigned int>& iData) = 0;
     };
 
@@ -135,7 +139,6 @@ namespace melodramatic{
         public:
             worldFeature(float x, float y,bool canStep):xPos(x),yPos(y),passable(canStep){};
             ~worldFeature(){delete quad;};
-            void generateVertices(std::vector<float>& vData, std::vector<unsigned int>& iData) override;
             void setTexturePath(std::string& path);
             void createQuadAsRectangle(float width, float height);
             void createQuadAsDiamond(float xNegOffSet,float xPosOffset, float yNegOffset, float yPosOffset);

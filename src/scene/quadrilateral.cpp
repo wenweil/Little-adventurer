@@ -8,10 +8,10 @@ namespace melodramatic{
 
     std::vector<vertex> diamond::generateVertices(){
         std::vector<vertex> retval;
-        retval.push_back(vertex(xPos,yPos+yPosOffset,0));
-        retval.push_back(vertex(xPos+xPosOffset,yPos,0));
-        retval.push_back(vertex(xPos,yPos-yNegOffset,0));
-        retval.push_back(vertex(xPos-xNegOffset,yPos,0));
+        retval.emplace_back(xPos,yPos+yPosOffset,0.0f,0.5f,1.0f);
+        retval.emplace_back(xPos-xNegOffset,yPos,0.0f,0.0f,0.5f);
+        retval.emplace_back(xPos,yPos-yNegOffset,0.0f,0.5f,0.0f);
+        retval.emplace_back(xPos+xPosOffset,yPos,0.0f,1.0f,0.5f);
         return retval;
     }
 
@@ -24,10 +24,10 @@ namespace melodramatic{
         std::vector<vertex> retval;
         float halfWidth = width / 2;
         float halfHeight = height /2;
-        retval.push_back(vertex(xPos+halfWidth,yPos-halfHeight,0));
-        retval.push_back(vertex(xPos-halfWidth,yPos-halfHeight,0));
-        retval.push_back(vertex(xPos+halfWidth,yPos+halfHeight,0));
-        retval.push_back(vertex(xPos-halfWidth,yPos+halfHeight,0));
+        retval.emplace_back(xPos-halfWidth,yPos+halfHeight,0.0f,0.0f,1.0f);
+        retval.emplace_back(xPos-halfWidth,yPos-halfHeight,0.0f,0.0f,0.0f);
+        retval.emplace_back(xPos+halfWidth,yPos-halfHeight,0.0f,1.0f,0.0f);
+        retval.emplace_back(xPos+halfWidth,yPos+halfHeight,0.0f,1.0f,1.0f);
         return retval;
     }
 }

@@ -12,7 +12,7 @@ namespace melodramatic {
     rendererAPI* renderer2D::API = nullptr;
     std::vector<float> renderer2D::vData;
     std::vector<unsigned int> renderer2D::iData;
-    unsigned int count = 0;
+    unsigned int renderer2D::count = 0;
 
     renderer2D::tmp renderer2D::dat = {
         0,

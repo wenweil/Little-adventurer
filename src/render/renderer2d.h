@@ -1,6 +1,6 @@
 #include "render/renderAPI.h"
 #include "scene/scene.h"
-#include "scene/layer.h"
+
 
 namespace melodramatic{
     class renderer2D{
@@ -17,7 +17,7 @@ namespace melodramatic{
             static void init();
             static float loadTexture(std::string& path);
             static void draw(const melodramatic::scene& scene);
-            static void draw(const melodramatic::layer& layer);
+            //static void draw(const melodramatic::layer& layer);
             static tmp dat;
         private:
             static void drawCurrent();

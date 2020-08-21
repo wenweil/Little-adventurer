@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include "render/vertex.h"
 
@@ -6,6 +7,7 @@ namespace melodramatic {
         public:
             virtual ~quadrilateral() = default;
             virtual void move(float x, float y) = 0;
+            virtual std::vector<vertex> generateVertices() = 0;
     };
 
     class diamond : public quadrilateral{
@@ -16,7 +18,7 @@ namespace melodramatic {
             diamond(float inXPosOffset, float inYPosOffset,float inXNegOffset, float inYNegOffset) 
               : xPosOffset(inXPosOffset), yPosOffset(inYPosOffset),xNegOffset(inXNegOffset), yNegOffset(inYNegOffset){};
             void move(float inXPos, float inYPos) override;
-            std::vector<vertex> generateVertices();
+            std::vector<vertex> generateVertices() override;
         private:
             float xPos,yPos,xPosOffset,xNegOffset,yPosOffset,yNegOffset;
     };
@@ -27,7 +29,7 @@ namespace melodramatic {
             rectangle(float inWidth, double inHeight) : xPos(0), yPos(0) , width(inWidth), height((float)inHeight){};
             rectangle(float inXPos, float inYPos) : xPos(inXPos), yPos(inYPos) , width(0), height(0){};
             void move(float inXPos, float inYPos) override;
-            std::vector<vertex> generateVertices();
+            std::vector<vertex> generateVertices() override;
         private:
             float xPos, yPos, width, height;
     };

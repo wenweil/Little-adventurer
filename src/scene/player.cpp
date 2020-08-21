@@ -42,11 +42,44 @@ namespace melodramatic{
             player::onDeath();
     }
 
+    void player::onDeath(){
+        
+    }
+
     void player::onRevive(){
         hp = hpMax;
     }
 
     void player::generateVertices(std::vector<float>& vData, std::vector<unsigned int>& iData){
+        float id = textureManager::getTextureID(texturePath);
+        int offset = 4*(iData.size()/6);
+        std::vector<vertex> points = quad->generateVertices();
+        int corner = 0;
+        for(auto p: points){
+            vData.push_back(p.getX());
+            vData.push_back(p.getY());
+            vData.push_back(p.getZ());
+            if(texturePath == ""){
+                vData.push_back(0.0f);
+                vData.push_back(0.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+            }else{
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+                vData.push_back(1.0f);
+            }
+            vData.push_back(p.getTextureX());
+            vData.push_back(p.getTextureY());
+            vData.push_back(id);
+        }
+        iData.push_back(0+offset);
+        iData.push_back(1+offset);
+        iData.push_back(2+offset);
+        iData.push_back(2+offset);
+        iData.push_back(3+offset);
+        iData.push_back(0+offset);
 
     }
     void player::getPos(float& x, float& y){
