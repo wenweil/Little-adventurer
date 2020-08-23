@@ -1,4 +1,3 @@
-#pragma once
 #include "scene/entity.h"
 #include <vector>
 namespace melodramatic{

@@ -59,7 +59,7 @@ namespace melodramatic{
             vData.push_back(p.getX());
             vData.push_back(p.getY());
             vData.push_back(p.getZ());
-            if(texturePath == ""){
+            if(id == 0.0f){
                 vData.push_back(0.0f);
                 vData.push_back(0.0f);
                 vData.push_back(1.0f);

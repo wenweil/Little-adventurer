@@ -121,12 +121,12 @@ namespace melodramatic {
         float width = 100.0f;
         float height = 100.0f;
 
-        float vertexData [] = {
+        /*float vertexData [] = {
             dat.xPos-width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 1.0f,  1.0f,
             dat.xPos-width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  0.0f, 0.0f,  1.0f,
             dat.xPos+width, dat.yPos-height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 0.0f,  1.0f,
             dat.xPos+width, dat.yPos+height, 0.0f,  1.0f, 1.0f, 1.00f, 1.0f,  1.0f, 1.0f,  1.0f,
-        };
+        };*/
 
         int w = 50;
         int h = 30;
@@ -134,7 +134,7 @@ namespace melodramatic {
         vData.reserve(w*h*4);
         iData.reserve(w*h*6);
 
-        float gradient = 1.0f;
+        /*float gradient = 1.0f;
 
         int offset = 0;
 
@@ -215,18 +215,28 @@ namespace melodramatic {
         offset +=4;
         
         for(auto c:vertexData)
-            vData.push_back(c);
+            vData.push_back(c);*/
+
+        entity* p = new player(640,360,100);
+
+        ((player*)p)->createQuadAsRectangle(128,128);
+        std::string path = "assets/nerd.png";
+        ((player*)p)->setTexturePath(path);
+        ((player*)p)->setSpeed(0.5f);
+        p->generateVertices(vData,iData);
 
         API->setVertexBuffer(vData);
         API->setIndexBuffer(iData);
 
         API->setTransformMatrix(m);
 
-        unsigned int tid;
+        /*unsigned int tid;
 
-        API->bindTexture(tid,textureData,imgWidth,imgHeight);
 
-        stbi_image_free(textureData);
+
+        /*API->bindTexture(tid,textureData,imgWidth,imgHeight);
+
+        stbi_image_free(textureData);*/
 
         API->draw();
 
@@ -235,6 +245,7 @@ namespace melodramatic {
         iData.clear();
         vData.clear();
 
+        delete p;
 
     }
     void renderer2D::drawCurrent(){
